@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loom</title>
+  <style>
+    html, body { margin: 0; height: 100%; color-scheme: light dark; background: Canvas; }
+  </style>
+</head>
+<body>
+  <script type="module">
+    const entry = new URL("https://bearmuckle.github.io/loom/loom-client.js");
+    entry.searchParams.set("v", crypto.randomUUID());
+    await import(entry.href);
+  </script>
+</body>
+</html>

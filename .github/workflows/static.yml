@@ -1,4 +1,4 @@
-# Build the landing page and the Loom browser client, then deploy both to Pages.
+# Deploy the landing page and a static host for the Loom browser client to Pages.
 name: Deploy static content to Pages
 
 on:
@@ -25,34 +25,11 @@ jobs:
       - name: Checkout site
         uses: actions/checkout@v4
 
-      - name: Checkout Loom
-        uses: actions/checkout@v4
-        with:
-          repository: bearmuckle/loom
-          ref: main
-          path: loom
-
-      - name: Install Rust and WASM target
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-unknown-unknown
-
-      - name: Install Trunk
-        uses: taiki-e/install-action@v2
-        with:
-          tool: trunk
-
-      - name: Build Loom browser client
-        working-directory: loom/crates/loom-ui
-        env:
-          RUSTC_BOOTSTRAP: "1"
-        run: trunk build --release --public-url /client/
-
       - name: Assemble Pages site
         run: |
           mkdir -p _site/client
           cp index.html _site/index.html
-          cp -R loom/crates/loom-ui/dist/. _site/client/
+          cp client/index.html _site/client/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
