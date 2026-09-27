@@ -28,8 +28,10 @@ jobs:
       - name: Assemble Pages site
         run: |
           mkdir -p _site/client
+          mkdir -p _site/assets
           cp index.html _site/index.html
           cp client/index.html _site/client/index.html
+          cp -R assets/. _site/assets/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
