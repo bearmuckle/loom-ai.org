@@ -31,7 +31,7 @@ jobs:
           mkdir -p _site/assets
           cp index.html _site/index.html
           cp styles.css site.js _site/
-          cp client/index.html _site/client/index.html
+          cp client/index.html client/manifest.webmanifest client/service-worker.js client/icon-192.png client/icon-512.png _site/client/
           cp -R assets/. _site/assets/
 
       - name: Setup Pages

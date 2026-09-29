@@ -3,16 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1e1e2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Loom</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../assets/loom.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <style>
     html, body { margin: 0; height: 100%; color-scheme: light dark; background: Canvas; }
+    .load-error { box-sizing: border-box; max-width: 32rem; margin: 15vh auto; padding: 1.5rem; font: 1rem/1.5 system-ui, sans-serif; }
   </style>
 </head>
 <body>
   <script type="module">
-    const entry = new URL("https://bearmuckle.github.io/loom/loom-client.js");
-    entry.searchParams.set("v", crypto.randomUUID());
-    await import(entry.href);
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js").catch(console.error);
+    }
+
+    try {
+      const entry = new URL("https://bearmuckle.github.io/loom/loom-client.js");
+      entry.searchParams.set("v", crypto.randomUUID());
+      await import(entry.href);
+    } catch (error) {
+      console.error("Could not load Loom", error);
+      const message = document.createElement("p");
+      message.className = "load-error";
+      message.textContent = "Loom could not load. Check your connection and try again.";
+      document.body.append(message);
+    }
   </script>
 </body>
 </html>
