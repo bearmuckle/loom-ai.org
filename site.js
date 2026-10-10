@@ -14,7 +14,7 @@ function renderTheme() {
   root.dataset.theme = theme;
   // The source and fallback follow the same theme before and after interaction.
   lightShot.media = theme === 'light' ? 'all' : 'not all';
-  const screenshot = `assets/loom-native-ui-${theme}.png`;
+  const screenshot = `assets/loom-ui-${theme}.png`;
   screenshotLink.href = screenshot;
   document.querySelector('.preview-hint').href = screenshot;
   dialogShot.src = screenshot;
