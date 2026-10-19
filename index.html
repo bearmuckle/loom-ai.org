@@ -52,7 +52,7 @@
         <a class="screenshot-link" href="assets/loom-ui-dark.png" aria-label="Enlarge the Loom browser client screenshot">
           <picture>
             <source class="light-shot" media="(prefers-color-scheme: light)" srcset="assets/loom-ui-light.png">
-            <img class="app-shot" src="assets/loom-ui-dark.png" width="714" height="546" fetchpriority="high" alt="The Loom browser client showing a conversation between the user and an agent, with the message composer below.">
+            <img class="app-shot" src="assets/loom-ui-dark.png" width="714" height="546" fetchpriority="high" alt="The Loom browser client showing a shared session: a task one person gave the agent, the agent's reply, and a peer chat exchange between two people, with the message composer below.">
           </picture>
           <span class="image-expand" aria-hidden="true">View full size <span>↗</span></span>
         </a>
@@ -83,6 +83,21 @@
       </div>
     </section>
 
+    <section class="wrap section shared" id="shared" aria-labelledby="shared-title">
+      <div class="shared-copy">
+        <p class="eyebrow">Shared sessions</p>
+        <h2 id="shared-title">One session,<br>as many people as it needs.</h2>
+        <p>A session belongs to the backend, not to the client that started it, so more than one person can work in the same conversation. People sign in with GitHub and appear on the session's roster with their role and presence.</p>
+        <p>Every message, direction, and approval is recorded against the person who gave it, and actions are ordered against the run revision they were decided on, so two people cannot both approve the same step.</p>
+        <p>Peer chat stays out of the model's context: <code>@people</code> messages everyone in the session and <code>@name</code> addresses one person, and neither wakes the agent.</p>
+      </div>
+      <ul class="role-list">
+        <li><strong>Owner</strong><span>Grants and roles, provider credentials, repository access, approval policy.</span></li>
+        <li><strong>Participant</strong><span>Peer chat, agent direction and answers, approvals, run control, terminals, tasks, edits.</span></li>
+        <li><strong>Observer</strong><span>Reads the session, its runs, roster, and revisions, and can request a higher role.</span></li>
+      </ul>
+    </section>
+
     <section class="wrap section get-started" aria-labelledby="get-started-title">
       <div>
         <p class="eyebrow">Try it. Build with it.</p>
@@ -105,7 +120,7 @@
   </footer>
   <dialog class="image-dialog" aria-label="Loom browser client screenshot, full size">
     <form method="dialog"><button class="close-dialog" aria-label="Close screenshot">Close <span aria-hidden="true">×</span></button></form>
-    <img class="dialog-shot" src="assets/loom-ui-dark.png" width="714" height="546" loading="lazy" alt="Full-size view of the Loom browser client with an open conversation.">
+    <img class="dialog-shot" src="assets/loom-ui-dark.png" width="714" height="546" loading="lazy" alt="Full-size view of the Loom browser client with a shared session open.">
   </dialog>
 </body>
 </html>
