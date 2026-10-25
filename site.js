@@ -1,50 +1,36 @@
 const root = document.documentElement;
-const themeToggle = document.querySelector('.theme-toggle');
+const themeButton = document.querySelector('.theme-button');
+const lightShot = document.querySelector('.shot-light');
+const fullSize = document.querySelector('.full-size');
 const systemTheme = window.matchMedia('(prefers-color-scheme: light)');
-const lightShot = document.querySelector('.light-shot');
-const screenshotLink = document.querySelector('.screenshot-link');
-const imageDialog = document.querySelector('.image-dialog');
-const dialogShot = document.querySelector('.dialog-shot');
-let preferredTheme = root.dataset.theme || 'system';
+const themeColor = document.querySelector('meta[name="theme-color"]');
+
+let preference = root.dataset.theme || 'system';
 
 function renderTheme() {
-  const theme = preferredTheme === 'system'
+  const theme = preference === 'system'
     ? (systemTheme.matches ? 'light' : 'dark')
-    : preferredTheme;
+    : preference;
   root.dataset.theme = theme;
-  // The source and fallback follow the same theme before and after interaction.
+  // Only one screenshot is fetched; the picture element picks it by theme.
   lightShot.media = theme === 'light' ? 'all' : 'not all';
-  const screenshot = `assets/loom-ui-${theme}.png`;
-  screenshotLink.href = screenshot;
-  document.querySelector('.preview-hint').href = screenshot;
-  dialogShot.src = screenshot;
-  const label = `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`;
-  themeToggle.setAttribute('aria-label', label);
-  themeToggle.title = label;
-  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#1e1e2e' : '#eff1f5';
+  fullSize.href = `assets/loom-ui-${theme}.png`;
+  const next = theme === 'dark' ? 'light' : 'dark';
+  themeButton.textContent = next === 'light' ? 'Light' : 'Dark';
+  themeButton.setAttribute('aria-label', `Switch to the ${next} theme`);
+  themeButton.title = `Switch to the ${next} theme`;
+  themeColor.content = theme === 'dark' ? '#17171a' : '#ffffff';
 }
 
-themeToggle.addEventListener('click', () => {
-  preferredTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  try { localStorage.setItem('loom-theme-v2', preferredTheme); } catch {}
+themeButton.addEventListener('click', () => {
+  preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('loom-theme-v2', preference); } catch {}
   renderTheme();
 });
-systemTheme.addEventListener('change', () => {
-  if (preferredTheme === 'system') renderTheme();
-});
-renderTheme();
-themeToggle.hidden = false;
 
-screenshotLink.addEventListener('click', (event) => {
-  if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-  if (typeof imageDialog.showModal !== 'function') return;
-  event.preventDefault();
-  imageDialog.showModal();
+systemTheme.addEventListener('change', () => {
+  if (preference === 'system') renderTheme();
 });
-imageDialog.addEventListener('click', (event) => {
-  if (event.target !== imageDialog) return;
-  const bounds = imageDialog.getBoundingClientRect();
-  if (event.clientX < bounds.left || event.clientX > bounds.right ||
-      event.clientY < bounds.top || event.clientY > bounds.bottom) imageDialog.close();
-});
-imageDialog.addEventListener('close', () => screenshotLink.focus({ preventScroll: true }));
+
+renderTheme();
+themeButton.hidden = false;

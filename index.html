@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An open source workspace for coding agents. Run sessions against your repositories, follow their progress, and review changes from a native app or your browser.">
-  <meta name="theme-color" content="#1e1e2e">
-  <title>Loom — coding agents, in your workspace</title>
+  <meta name="description" content="Loom is a remote-first coding-agent environment. A Rust backend owns sessions, tools, and workspace state; a GPUI client runs natively or in the browser.">
+  <meta name="theme-color" content="#17171a">
+  <title>Loom — a remote-first coding-agent environment</title>
   <link rel="icon" href="assets/loom.svg" type="image/svg+xml">
   <script>
     // Apply the saved appearance before the first paint. Storage may be unavailable.
@@ -17,110 +17,101 @@
   <link rel="stylesheet" href="styles.css">
   <script src="site.js" defer></script>
 </head>
-<body>
+<body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="wrap topbar" id="top">
-    <a class="brand" href="#top" aria-label="Loom home">
+
+  <header class="wrap site-header">
+    <a class="site-title" href="#top">
       <svg class="logo" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 9c8 0 8 22 16 22s8-22 8-22M8 31c8 0 8-22 16-22s8 22 8 22" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><circle cx="8" cy="9" r="2.5" fill="currentColor"/><circle cx="32" cy="31" r="2.5" fill="currentColor"/></svg>
       Loom
     </a>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#how">How it works</a>
-      <a href="https://github.com/bearmuckle/loom">GitHub <span aria-hidden="true">↗</span></a>
-      <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme" hidden>
-        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
-        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg>
-      </button>
+    <nav class="site-nav" aria-label="Site">
+      <a href="#run">Run it</a>
+      <a href="#documentation">Documentation</a>
+      <a href="https://github.com/bearmuckle/loom">GitHub</a>
+      <button class="theme-button" type="button" title="Switch color theme" hidden>Light</button>
     </nav>
   </header>
-  <main id="main">
-    <section class="wrap hero" aria-labelledby="hero-title">
-      <div class="hero-heading">
-        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Open source. In active development.</p>
-        <h1 id="hero-title">Coding agents,<br><span>in your workspace.</span></h1>
-      </div>
-      <div class="hero-intro">
-        <p class="lead">Run agents against your repositories. Follow their work, step in when needed, and review what changed.</p>
-        <p class="hero-detail">A native app and browser client, connected to a Rust backend you run locally or remotely.</p>
-        <div class="actions">
-          <a class="button" href="client/">Open the browser client <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href="https://github.com/bearmuckle/loom#build-and-run">Run it yourself <span aria-hidden="true">→</span></a>
-        </div>
-        <p class="client-note">Connect it to a Loom backend to run sessions against your repositories.</p>
-      </div>
-      <figure class="product-preview">
-        <a class="screenshot-link" href="assets/loom-ui-dark.png" aria-label="Enlarge the Loom browser client screenshot">
-          <picture>
-            <source class="light-shot" media="(prefers-color-scheme: light)" srcset="assets/loom-ui-light.png">
-            <img class="app-shot" src="assets/loom-ui-dark.png" width="714" height="546" fetchpriority="high" alt="The Loom browser client showing a shared session: a task one person gave the agent, the agent's reply, and a peer chat exchange between two people, with the message composer below.">
-          </picture>
-          <span class="image-expand" aria-hidden="true">View full size <span>↗</span></span>
-        </a>
-        <figcaption><span><span class="caption-dot" aria-hidden="true"></span> The Loom browser client</span><span class="preview-format">Browser client · WebAssembly</span><a class="preview-hint" href="assets/loom-ui-dark.png">View full size ↗</a></figcaption>
-      </figure>
-    </section>
 
-    <section class="architecture" id="how" aria-labelledby="architecture-title">
-      <div class="wrap architecture-grid" id="product">
-        <div class="architecture-copy">
-          <p class="eyebrow">Clients and backend</p>
-          <h2 id="architecture-title">One GPUI interface.<br>Desktop and browser.</h2>
-          <p>Loom uses GPUI for its native app and its WebAssembly browser client. Both connect to a Rust backend that manages sessions, tools, and workspace state.</p>
-          <p>The native app includes a local worker. The browser connects to a separately running backend. Either client can connect to a remote backend.</p>
-          <a class="text-link" href="https://github.com/bearmuckle/loom">Explore the project <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="architecture-diagram" role="img" aria-label="The native app, with a local worker included, or the browser client connects to a Loom backend. The backend manages sessions, tools, and the workspace, locally or remotely.">
-          <div class="diagram-label">CHOOSE YOUR CLIENT</div>
-          <div class="clients">
-            <div class="diagram-node"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg><strong>Native app</strong><span>Local worker included</span></div>
-            <span class="or">or</span>
-            <div class="diagram-node"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6 6.5h.01M9 6.5h.01"/></svg><strong>Browser client</strong><span>Connect to a backend</span></div>
-          </div>
-          <div class="connector" aria-hidden="true"><span></span></div>
-          <div class="backend"><div class="backend-heading"><span class="status-dot" aria-hidden="true"></span><strong>Loom backend</strong><span>Rust</span></div><div class="backend-parts"><span>Sessions</span><span>Tools</span><span>Workspace</span></div></div>
-          <p class="diagram-caption">Run locally or on your own infrastructure.</p>
-        </div>
-      </div>
-    </section>
+  <main class="wrap" id="main">
+    <h1>Loom is a remote-first coding-agent environment.</h1>
+    <p>A Rust backend owns agent sessions, tool execution, workspace state, and model integrations. A GPUI client runs natively or in the browser and attaches to a local or remote backend.</p>
+    <p>Loom is pre-1.0, so interfaces, configuration, and on-disk state can change between releases. The <a href="https://github.com/bearmuckle/loom/blob/main/docs/security.md">security and trust model</a> describes what a worker can reach and what it stores; read it before using Loom with sensitive data or exposing it beyond a trusted boundary.</p>
 
-    <section class="wrap section shared" id="shared" aria-labelledby="shared-title">
-      <div class="shared-copy">
-        <p class="eyebrow">Shared sessions</p>
-        <h2 id="shared-title">One session,<br>as many people as it needs.</h2>
-        <p>A session belongs to the backend, not to the client that started it, so more than one person can work in the same conversation. People sign in with GitHub and appear on the session's roster with their role and presence.</p>
-        <p>Every message, direction, and approval is recorded against the person who gave it, and actions are ordered against the run revision they were decided on, so two people cannot both approve the same step.</p>
-        <p>Peer chat stays out of the model's context: <code>@people</code> messages everyone in the session and <code>@name</code> addresses one person, and neither wakes the agent.</p>
-      </div>
-      <ul class="role-list">
-        <li><strong>Owner</strong><span>Grants and roles, provider credentials, repository access, approval policy.</span></li>
-        <li><strong>Participant</strong><span>Peer chat, agent direction and answers, approvals, run control, terminals, tasks, edits.</span></li>
-        <li><strong>Observer</strong><span>Reads the session, its runs, roster, and revisions, and can request a higher role.</span></li>
+    <figure>
+      <picture>
+        <source class="shot-light" media="(prefers-color-scheme: light)" srcset="assets/loom-ui-light.png">
+        <img class="shot" src="assets/loom-ui-dark.png" width="714" height="546" alt="The Loom browser client showing a shared session: a direction one person gave the agent, the agent's reply, and a peer chat exchange between two people, with the message composer below.">
+      </picture>
+      <figcaption>The browser client, connected to a backend, showing a session shared by two people. <a class="full-size" href="assets/loom-ui-dark.png">Full size</a></figcaption>
+    </figure>
+
+    <section id="what" aria-labelledby="what-title">
+      <h2 id="what-title">What it does</h2>
+      <ul>
+        <li>Runs agent sessions that belong to the backend, so they survive disconnects, reconnects, and restarts.</li>
+        <li>Gates tool use behind approval, with workspace, diff, and task review.</li>
+        <li>Connects to OpenAI, DeepSeek, OpenAI-compatible endpoints, Ollama, and GitHub Copilot.</li>
+        <li>Runs child agents on isolated worktrees.</li>
+        <li>Keeps a project goal, set with <code>/goal</code>, that the agent receives on every run.</li>
       </ul>
     </section>
 
-    <section class="wrap section get-started" aria-labelledby="get-started-title">
-      <div>
-        <p class="eyebrow">Try it. Build with it.</p>
-        <h2 id="get-started-title">A work in progress.<br>Open for you to shape.</h2>
-        <p>Loom is an experimental developer preview. Open the browser client, run it from source, or help improve what comes next.</p>
-        <div class="actions"><a class="button" href="client/">Open the browser client <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/bearmuckle/loom#build-and-run">Build from source <span aria-hidden="true">→</span></a></div>
-      </div>
-      <aside class="community" aria-labelledby="community-title">
-        <h3 id="community-title">Let’s build this in the open.</h3>
-        <p>Share how you work, ask a question, or help decide what Loom should do next.</p>
-        <a class="text-link" href="https://discord.gg/8dtwsTF4r">Join the conversation on Discord <span aria-hidden="true">↗</span></a>
-        <p class="preview-note">Early software: behavior may change. See the <a href="https://github.com/bearmuckle/loom#current-capabilities-and-limitations">current capabilities and limitations</a> before using it with your projects.</p>
-      </aside>
+    <section id="clients" aria-labelledby="clients-title">
+      <h2 id="clients-title">Clients and backend</h2>
+      <p>The native app embeds a worker, so it can run a session without a separate server. The browser client is the same GPUI interface compiled to WebAssembly; it connects to a backend over the Loom protocol. Either client can attach to a backend on another machine.</p>
+      <p><code>loom-server</code> is that backend as a standalone process, and <code>loom-cli</code> is a headless client of the same protocol.</p>
+    </section>
+
+    <section id="shared" aria-labelledby="shared-title">
+      <h2 id="shared-title">Shared sessions</h2>
+      <p>A session can have more than one person attached. People sign in with GitHub and appear on the session's roster with a role and their presence: online, away, or offline.</p>
+      <dl>
+        <dt>Owner</dt>
+        <dd>Grants and revokes access, sets roles, selects the provider credential for later runs, and sets the session's approval policy.</dd>
+        <dt>Participant</dt>
+        <dd>Sends agent directions and answers, approves or rejects pending actions, controls runs, and uses terminals, tasks, and edits.</dd>
+        <dt>Observer</dt>
+        <dd>Reads the session, its runs, roster, and revisions, and can request a higher role.</dd>
+      </dl>
+      <p>Each direction, answer, approval, and run action is attributed to the person who gave it, and actions are ordered against the revision they were decided on, so an action on a stale revision is rejected rather than applied twice.</p>
+      <p>Peer chat is addressed with <code>@people</code> or <code>@name</code>. It is stored with the session history, is never sent to the model, and does not start or continue a run.</p>
+    </section>
+
+    <section id="run" aria-labelledby="run-title">
+      <h2 id="run-title">Run it</h2>
+      <p>The native client is built with Cargo (Rust 1.99 or newer). From the repository root:</p>
+      <pre><code>cargo run -p loom-ui -- --demo
+cargo run -p loom-ui -- --project /path/to/project</code></pre>
+      <p><code>--demo</code> starts the client without a provider; the second command opens a project directory. Linux system packages and other build notes are in <a href="https://github.com/bearmuckle/loom#build-and-run">Build and run</a>.</p>
+      <p>For browser development, <code>./scripts/dev-wasm.sh</code> serves a backend and the browser client on loopback. It needs Trunk and the <code>wasm32-unknown-unknown</code> target.</p>
+      <p>The published <a href="client/">browser client</a> connects to a backend you specify. The <a href="https://bearmuckle.github.io/loom/?demo=true">deterministic demo</a> runs without a backend or a provider credential.</p>
+    </section>
+
+    <section id="documentation" aria-labelledby="documentation-title">
+      <h2 id="documentation-title">Documentation</h2>
+      <ul class="doc-list">
+        <li><a href="https://github.com/bearmuckle/loom/blob/main/docs/architecture.md">Architecture</a></li>
+        <li><a href="https://github.com/bearmuckle/loom/blob/main/docs/deployment.md">Deployment</a></li>
+        <li><a href="https://github.com/bearmuckle/loom/blob/main/docs/headless-client.md">Headless client</a></li>
+        <li><a href="https://github.com/bearmuckle/loom/blob/main/docs/security.md">Security and trust model</a></li>
+        <li><a href="https://github.com/bearmuckle/loom/blob/main/docs/product.md">Product scope</a></li>
+        <li><a href="https://github.com/bearmuckle/loom/blob/main/docs/protocol.md">Protocol</a></li>
+      </ul>
+    </section>
+
+    <section id="license" aria-labelledby="license-title">
+      <h2 id="license-title">License</h2>
+      <p>Loom is open source. Individual crates declare their license in <code>Cargo.toml</code>: the reusable core crates are GPL-3.0-only; <code>loom-protocol</code> and <code>loom-server</code> are AGPL-3.0-only.</p>
     </section>
   </main>
-  <footer class="wrap footer">
-    <a class="brand" href="#top" aria-label="Loom, back to top"><svg class="logo" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 9c8 0 8 22 16 22s8-22 8-22M8 31c8 0 8-22 16-22s8 22 8 22" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><circle cx="8" cy="9" r="2.5" fill="currentColor"/><circle cx="32" cy="31" r="2.5" fill="currentColor"/></svg>Loom</a>
-    <span>Open source · Experimental · © 2026</span>
-    <a href="https://github.com/bearmuckle/loom">Source on GitHub <span aria-hidden="true">↗</span></a>
+
+  <footer class="wrap site-footer">
+    <p>© 2026 Loom contributors</p>
+    <nav aria-label="Elsewhere">
+      <a href="https://github.com/bearmuckle/loom">Source</a>
+      <a href="https://discord.gg/8dtwsTF4r">Discord</a>
+    </nav>
   </footer>
-  <dialog class="image-dialog" aria-label="Loom browser client screenshot, full size">
-    <form method="dialog"><button class="close-dialog" aria-label="Close screenshot">Close <span aria-hidden="true">×</span></button></form>
-    <img class="dialog-shot" src="assets/loom-ui-dark.png" width="714" height="546" loading="lazy" alt="Full-size view of the Loom browser client with a shared session open.">
-  </dialog>
 </body>
 </html>
