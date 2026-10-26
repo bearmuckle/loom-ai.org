@@ -38,6 +38,11 @@
     <p>A Rust backend owns agent sessions, tool execution, workspace state, and model integrations. A GPUI client runs natively or in the browser and attaches to a local or remote backend.</p>
     <p>Loom is pre-1.0, so interfaces, configuration, and on-disk state can change between releases. The <a href="https://github.com/bearmuckle/loom/blob/main/docs/security.md">security and trust model</a> describes what a worker can reach and what it stores; read it before using Loom with sensitive data or exposing it beyond a trusted boundary.</p>
 
+    <div class="open-client">
+      <a class="button" href="client/">Open the browser client</a>
+      <span>Connects to a backend you specify.</span>
+    </div>
+
     <figure>
       <picture>
         <source class="shot-light" media="(prefers-color-scheme: light)" srcset="assets/loom-ui-light.png">
@@ -85,7 +90,7 @@
 cargo run -p loom-ui -- --project /path/to/project</code></pre>
       <p><code>--demo</code> starts the client without a provider; the second command opens a project directory. Linux system packages and other build notes are in <a href="https://github.com/bearmuckle/loom#build-and-run">Build and run</a>.</p>
       <p>For browser development, <code>./scripts/dev-wasm.sh</code> serves a backend and the browser client on loopback. It needs Trunk and the <code>wasm32-unknown-unknown</code> target.</p>
-      <p>The published <a href="client/">browser client</a> connects to a backend you specify. The <a href="https://bearmuckle.github.io/loom/?demo=true">deterministic demo</a> runs without a backend or a provider credential.</p>
+      <p>The <a href="https://bearmuckle.github.io/loom/?demo=true">deterministic demo</a> runs without a backend or a provider credential.</p>
     </section>
 
     <section id="documentation" aria-labelledby="documentation-title">
